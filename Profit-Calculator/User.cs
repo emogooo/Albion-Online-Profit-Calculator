@@ -14,16 +14,15 @@ namespace Profit_Calculator
             Username = username;
             Email = email;
             Password = password;
-            IsApproved = false;
+            createDate = DateTime.Now;
         }
         public string Username { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public bool IsApproved { get; set; }
-
+        public DateTime createDate { get; }
         public override string ToString()
         {
-            return Username + " - " + Email + " - " + Password + " - " + IsApproved;
+            return Username + " - " + Email + " - " + Password;
         }
     }
 }

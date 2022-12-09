@@ -20,3 +20,4 @@ C:\Users\hp\OneDrive\Masaüstü\GitHub\Albion-Online-Profit-Calculator\Profit-Ca
 C:\Users\hp\OneDrive\Masaüstü\GitHub\Albion-Online-Profit-Calculator\Profit-Calculator\obj\Debug\net6.0-windows\Profit-Calculator.pdb
 C:\Users\hp\OneDrive\Masaüstü\GitHub\Albion-Online-Profit-Calculator\Profit-Calculator\obj\Debug\net6.0-windows\Profit-Calculator.genruntimeconfig.cache
 C:\Users\hp\OneDrive\Masaüstü\GitHub\Albion-Online-Profit-Calculator\Profit-Calculator\obj\Debug\net6.0-windows\ref\Profit-Calculator.dll
+C:\Users\hp\OneDrive\Masaüstü\GitHub\Albion-Online-Profit-Calculator\Profit-Calculator\obj\Debug\net6.0-windows\Profit_Calculator.Properties.Resources.resources
