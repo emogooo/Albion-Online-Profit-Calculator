@@ -13,10 +13,7 @@ namespace Profit_Calculator
             InitializeComponent();
             panelRegister.Hide();
             Opacity = 0.9;
-        }
-        private void EntryForm_Load(object sender, EventArgs e)
-        {
-
+            StartPosition = FormStartPosition.CenterScreen;
         }
         private void EntryForm_MouseUp(object sender, MouseEventArgs e)
         {
@@ -54,7 +51,7 @@ namespace Profit_Calculator
             string password = textBoxRegisterPassword.Text;
             string email = textBoxRegisterEmail.Text;
 
-            if (new EmailAddressAttribute().IsValid(email) && new Regex("^[a-zA-Z][a-zA-Z0-9]*$").IsMatch(username))
+            if (new EmailAddressAttribute().IsValid(email) && new Regex("^[a-zA-Z][a-zA-Z0-9]*$").IsMatch(username) && password.Length > 3 && username.Length > 4 && email.Length > 15)
             {
                 bool isUsernameUsed = false;
                 bool isEmailUsed = false;
@@ -78,7 +75,10 @@ namespace Profit_Calculator
                 if (!isUsernameUsed && !isEmailUsed)
                 {
                     FirebaseOperations.SetItem("Users", new User(username, email, password));
-                    MessageBox.Show("Kaydýnýz Baþarýyla Tamamlandý.");
+                    new CustomMessageBox("Registration completed successfully.").Show();
+                    textBoxRegisterUsername.Text = string.Empty;
+                    textBoxRegisterPassword.Text = string.Empty;
+                    textBoxRegisterEmail.Text = string.Empty;
                     panelRegister.Hide();
                     textBoxLoginUsername.Text = username;
                     textBoxLoginPassword.Text = password;
@@ -86,35 +86,27 @@ namespace Profit_Calculator
                 }
                 else if (isUsernameUsed && isEmailUsed)
                 {
-                    MessageBox.Show("Ayný kullanýcý adý ve e-mail ile kayýtlý bir kullanýcý zaten var.");
+                    new CustomMessageBox("There is already a registered user with the same username and e-mail.").Show();
                 }
                 else if (isUsernameUsed)
                 {
-                    MessageBox.Show("Ayný kullanýcý adý ile kayýtlý bir kullanýcý zaten var.");
+                    new CustomMessageBox("There is already a registered user with the same username.").Show();
                 }
                 else if (isEmailUsed)
                 {
-                    MessageBox.Show("Ayný e-mail ile kayýtlý bir kullanýcý zaten var.");
+                    new CustomMessageBox("There is already a registered user with the same e-mail.").Show();
                 }
             }
-            else if (!new EmailAddressAttribute().IsValid(email) && !new Regex("^[a-zA-Z][a-zA-Z0-9]*$").IsMatch(username))
+            else 
             {
-                MessageBox.Show("Çok göze batýyosun");
-            }
-            else if (!new EmailAddressAttribute().IsValid(email))
-            {
-                MessageBox.Show("Emaili düzgün gir.");
-            }
-            else if (!new Regex("^[a-zA-Z][a-zA-Z0-9]*$").IsMatch(username))
-            {
-                MessageBox.Show("Kullanýcý adýný düzgün gir.");
+                new CustomMessageBox("Invalid input.").Show();
             }
         }
         private async void buttonLogin_Click(object sender, EventArgs e)
         {
             string username = textBoxLoginUsername.Text;
             string password = textBoxLoginPassword.Text;
-            if (new Regex("^[a-zA-Z][a-zA-Z0-9]*$").IsMatch(username))
+            if (password.Length > 3 && username.Length > 4 && new Regex("^[a-zA-Z][a-zA-Z0-9]*$").IsMatch(username))
             {
                 Dictionary<string, User> users = await FirebaseOperations.GetListOfItems<User>("Users");
                 bool isLoginSucces = false;
@@ -125,12 +117,11 @@ namespace Profit_Calculator
                     {
                         if (Equals(user.Value.Password, password))
                         {
-                            MessageBox.Show("HLLKE");
                             isLoginSucces = true;
                         }
                         else
                         {
-                            MessageBox.Show("Username or password is not correct.");
+                            new CustomMessageBox("Username or password is not correct.").Show();
                             isMessageBoxShowed = true;
                         }
                         break;
@@ -138,12 +129,12 @@ namespace Profit_Calculator
                 }
                 if (!isMessageBoxShowed && !isLoginSucces)
                 {
-                    MessageBox.Show("Username or password is not correct.");
+                    new CustomMessageBox("Username or password is not correct.").Show();
                 }
             }
             else
             {
-                MessageBox.Show("Göze batýyon bak yapma");
+                new CustomMessageBox("Invalid input.").Show();
             }
         }
     }

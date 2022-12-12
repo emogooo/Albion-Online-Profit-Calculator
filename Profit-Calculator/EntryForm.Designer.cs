@@ -268,7 +268,6 @@
             this.Controls.Add(this.panelLogin);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EntryForm";
-            this.Load += new System.EventHandler(this.EntryForm_Load);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.EntryForm_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.EntryForm_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.EntryForm_MouseUp);
